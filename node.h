@@ -11,8 +11,6 @@ struct Node {
     Node* next;
     Node* prev;
 
-    void killSelf();
-    void print_next();
 };
 
 #endif
