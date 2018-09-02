@@ -102,8 +102,14 @@ class List {
         bool empty(){ return !start; };
         int size(){ return nodes; };
         void clear();
-        Iterator<T> begin(){};
-        Iterator<T> end(){};
+        Iterator<T> begin(){
+          Iterator<T> it(start);
+          return it;
+        };
+        Iterator<T> end(){
+          Iterator<T> it(start->prev);
+          return it;
+        };
 
         ~List(){};
 };
