@@ -68,26 +68,39 @@ class List {
         void pop_front(){
           if (empty()) throw "Can not delete element in empty list";
           Node<T>* secondnode = start->next;
-          //Link final and second node
-          secondnode->prev=start->prev;
-          start->prev->next=secondnode;
-          //Erase previous start node
-          start->next=start->prev=nullptr;
-          delete start;
-          //Change start node for second node
-          start=secondnode;
+          if (secondnode==start){ //One element
+            start=nullptr;
+            delete start;
+          }
+          else{
+            //Link final and second node
+            secondnode->prev=start->prev;
+            start->prev->next=secondnode;
+            //Erase previous start node
+            start->next=start->prev=nullptr;
+            delete start;
+            //Change start node for second node
+            start=secondnode;
+          }
 
           //List size decreases by 1
           nodes--;
         };
         void pop_back(){
           if (empty()) throw "Can not delete element in empty list";
-          Node<T>* secondlastnode = start->prev->prev;
-          //Erase content of previous final node
-          delete start->prev;
-          //Link second last node to start
-          secondlastnode->next=start;
-          start->prev=secondlastnode;
+          if (start->next==start){ //One element
+            start=nullptr;
+            delete start;
+          }
+          else{
+            Node<T>* secondlastnode = start->prev->prev;
+            //Erase content of previous final node
+            start->prev->prev=start->prev->next=nullptr;
+            delete start->prev;
+            //Link second last node to start
+            secondlastnode->next=start;
+            start->prev=secondlastnode;
+          }
 
           //List size decreases by 1
           nodes--;
