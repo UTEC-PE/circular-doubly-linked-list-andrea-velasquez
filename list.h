@@ -114,7 +114,9 @@ class List {
         void concat(List<T> &other);
         bool empty(){ return !start; };
         int size(){ return nodes; };
-        void clear();
+        void clear(){
+          while (nodes) this->pop_front();
+        };
         Iterator<T> begin(){
           Iterator<T> it(start);
           return it;
@@ -124,7 +126,7 @@ class List {
           return it;
         };
 
-        ~List(){};
+        ~List(){ this->clear(); };
 };
 
 #endif
