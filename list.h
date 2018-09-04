@@ -111,7 +111,13 @@ class List {
           for (int i=0; i<position%nodes; i++) temporalnode = temporalnode->next;
           return temporalnode->data;
         };
-        void concat(List<T> &other);
+        void concat(List<T> &other){
+          Node<T>* temporalnode = other.start;
+          for (int i=0; i<other.size(); i++){
+            this->push_back(temporalnode->data);
+            temporalnode=temporalnode->next;
+          }
+        };
         bool empty(){ return !start; };
         int size(){ return nodes; };
         void clear(){
